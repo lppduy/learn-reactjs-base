@@ -1,14 +1,18 @@
-import AlbumFeature from 'features/Album';
+// import ColorBox from 'components/ColorBox';
+// import Counter from 'components/Counter';
+// import AlbumFeature from 'features/Album';
 import TodoFeature from 'features/Todo';
+// import logo from './logo.svg';
 import React from 'react';
 import './App.scss';
-import logo from './logo.svg';
 
 function App() {
   return (
     <div className="app">
-      {/* <TodoFeature /> */}
-      <AlbumFeature />
+      <TodoFeature />
+      {/* <AlbumFeature /> */}
+      {/* <ColorBox />
+      <Counter /> */}
     </div>
   );
 }
