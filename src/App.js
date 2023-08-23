@@ -1,8 +1,6 @@
-// import ColorBox from 'components/ColorBox';
-// import Counter from 'components/Counter';
+import NotFound from 'components/NotFound';
 import AlbumFeature from 'features/Album';
 import TodoFeature from 'features/Todo';
-// import logo from './logo.svg';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.scss';
 
@@ -25,6 +23,8 @@ function App() {
         <Route path="/" component={TodoFeature} exact />
         <Route path="/todos" component={TodoFeature} exact={false} />
         <Route path="/albums" component={AlbumFeature} />
+
+        <Route component={NotFound} />
       </Switch>
       Footer
     </div>
