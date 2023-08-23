@@ -1,6 +1,7 @@
 import TodoList from 'features/Todo/components/TodoList';
 import { useState } from 'react';
-
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import queryString from 'query-string';
 function ListPage(props) {
   const initTodoList = [
     {
@@ -19,10 +20,17 @@ function ListPage(props) {
       status: 'new',
     },
   ];
-  // **** state
+
+  const location = useLocation();
   const [todoList, setTodoList] = useState(initTodoList);
-  const [filteredStatus, setFilteredStatus] = useState('all');
-  // **** function
+  const [filteredStatus, setFilteredStatus] = useState(() => {
+    const params = queryString.parse(location.search);
+
+    console.log(params);
+
+    return params.status || 'all';
+  });
+
   const handleTodoClick = (todo, idx) => {
     // clone current array to the new one
     const newTodoList = [...todoList];
