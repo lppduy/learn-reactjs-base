@@ -3,8 +3,7 @@
 import AlbumFeature from 'features/Album';
 import TodoFeature from 'features/Todo';
 // import logo from './logo.svg';
-import React from 'react';
-import { NavLink, Link, Route, Switch, Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.scss';
 
 function App() {
