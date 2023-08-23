@@ -4,7 +4,7 @@ import AlbumFeature from 'features/Album';
 import TodoFeature from 'features/Todo';
 // import logo from './logo.svg';
 import React from 'react';
-import { NavLink, Link, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import { NavLink, Link, Route, Switch, Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.scss';
 
 function App() {
@@ -21,6 +21,8 @@ function App() {
         <NavLink to="/albums">Albums</NavLink>
       </p>
       <Switch>
+        <Redirect from="/home" to="/" exact />
+        <Redirect from="/post-list/:postId" to="/post/:postId" exact />
         <Route path="/" component={TodoFeature} exact />
         <Route path="/todos" component={TodoFeature} exact={false} />
         <Route path="/albums" component={AlbumFeature} />
