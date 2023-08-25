@@ -1,7 +1,9 @@
 import TodoList from 'features/Todo/components/TodoList';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom/cjs/react-router-dom';
 import queryString from 'query-string';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
 function ListPage(props) {
   const initTodoList = [
     {
@@ -22,6 +24,12 @@ function ListPage(props) {
   ];
 
   const location = useLocation();
+  const history = useHistory();
+  const match = useRouteMatch();
+  console.log('location', location);
+  console.log('history', history);
+  console.log('match', match);
+
   const [todoList, setTodoList] = useState(initTodoList);
   const [filteredStatus, setFilteredStatus] = useState(() => {
     const params = queryString.parse(location.search);
@@ -30,6 +38,11 @@ function ListPage(props) {
 
     return params.status || 'all';
   });
+
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    setFilteredStatus(params.status || 'all');
+  }, [location.search]);
 
   const handleTodoClick = (todo, idx) => {
     // clone current array to the new one
@@ -44,16 +57,34 @@ function ListPage(props) {
     setTodoList(newTodoList);
   };
   const handleShowAllClick = () => {
-    setFilteredStatus('all');
+    // setFilteredStatus('all');
+
+    const queryParams = { status: 'all' };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParams),
+    });
   };
   const handleShowCompletedClick = () => {
-    setFilteredStatus('completed');
+    // setFilteredStatus('completed');
+    const queryParams = { status: 'completed' };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParams),
+    });
   };
   const handleShowNewClick = () => {
-    setFilteredStatus('new');
+    // setFilteredStatus('new');
+    const queryParams = { status: 'new' };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParams),
+    });
   };
-
-  const renderTodolist = todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
+  const renderTodolist = useMemo(() => {
+    return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
+  }, [todoList, filteredStatus]);
+  // useMemo -> khi todoList hooặc filteredStatus thì tính toán lại còn k dùng giá trị cũ tính lại bình thường
   // console.log(renderTodolist);
   return (
     <div>
