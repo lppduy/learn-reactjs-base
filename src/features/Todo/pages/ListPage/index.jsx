@@ -1,9 +1,8 @@
+import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
-import { useState } from 'react';
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom/cjs/react-router-dom';
 import queryString from 'query-string';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom/cjs/react-router-dom';
 function ListPage(props) {
   const initTodoList = [
     {
@@ -86,11 +85,20 @@ function ListPage(props) {
   }, [todoList, filteredStatus]);
   // useMemo -> khi todoList hooặc filteredStatus thì tính toán lại còn k dùng giá trị cũ tính lại bình thường
   // console.log(renderTodolist);
+  const handleTodoFormSubmit = (values) => {
+    console.log('Form submit: ', values);
+  };
+
   return (
     <div>
       <div>
+        <h3>What to do</h3>
+        <TodoForm onSubmit={handleTodoFormSubmit} />
+
         <h3>Todo List</h3>
+
         <TodoList todoList={renderTodolist} onTodoClick={handleTodoClick} />
+
         <div>
           <button onClick={handleShowAllClick}>Show All</button>
           <button onClick={handleShowCompletedClick}>Show Completed</button>
