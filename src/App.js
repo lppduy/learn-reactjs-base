@@ -6,6 +6,15 @@ import TodoFeature from 'features/Todo';
 import { useEffect } from 'react';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.scss';
+import styled from 'styled-components';
+
+// CSS in JS
+const Title = styled.h1`
+  text-align: center;
+  font-weight: bold;
+
+  color: ${(props) => props.color || 'green'};
+`;
 
 function App() {
   useEffect(() => {
@@ -18,11 +27,14 @@ function App() {
       console.log('>>> productList', productList);
     };
     fetchProducts();
-  });
+  }, []);
+
+  // const color = 'red'; // inline css hay dùng cho kiểu dữ liệu mà mình k biết trước
+  // <div className="app" style={{color:color}}>
 
   return (
     <div className="app">
-      Home Page
+      <Title color="goldenrod">Header</Title>
       {/* default: activeClassName="active" */}
       <p>
         <NavLink to="/todos" activeClassName="active-menu">
